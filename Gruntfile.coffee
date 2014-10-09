@@ -8,7 +8,9 @@ module.exports = (grunt) ->
           join: true
         files:
           'build/<%= pkg.name %>.js': [
+            'src/const.coffee'
             'src/utils.coffee'
+            'src/block.coffee'
             'src/map.coffee'
             'src/player.coffee'
             'src/bot.coffee'

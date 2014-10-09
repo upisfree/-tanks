@@ -1,1 +1,1 @@
-(function(){Math.randomInt=function(a,b){return Math.floor(Math.random()*(b-a+1)+a)}}).call(this);
+(function(){var a,b;Math.randomInt=function(a,b){return Math.floor(Math.random()*(b-a+1)+a)},a=function(){function a(){}return a.prototype.size=32,a}(),b=[]}).call(this);
