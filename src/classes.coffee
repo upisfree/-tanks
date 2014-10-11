@@ -1,26 +1,34 @@
 class Block
-  constructor: (@x, @y, @texture, @i = blocks.length) ->
+  constructor: (@x, @y, @type) ->
+    @i = blocks.length
     #blocks.push @
 
 class Tank extends Block
-  constructor: (@x, @y, @texture, @lives) ->
+  constructor: (@x, @y, @type, @lives) ->
   move: (x, y) ->
     if @x + x < size and @x + x > -1 and
        @y + y < size and @y + y > -1
       @x += x
       @y += y
       blocks[@i] = this
+
+      console.log @lives
+
+      for i in blocks
+        if @x is i.x and @y is i.y and i.type is 'hedgehog'
+          @applyDamage 1
+
   applyDamage: (l) ->
     @lives -= l
 
     if @lives <= 0
-      console.log 'Tank was destroyed'
+      @destroy 'Tank was destroyed!'
 
-class Bot extends Tank
-  _ai: null
+  destroy: (message) ->
+    console.log message
 
 class Player extends Tank
-  enableControl: () ->
+  enableControl: ->
     window.onkeydown = (e) ->
       switch e.keyCode
         when KEY_CODE.ARROW.LEFT,  KEY_CODE.A
@@ -31,3 +39,13 @@ class Player extends Tank
           player.move 1, 0
         when KEY_CODE.ARROW.DOWN,  KEY_CODE.S
           player.move 0, 1
+  disableControl: ->
+    window.onkeydown = null
+  destroy: ->
+    @disableControl()
+    super 'Bye, sir!'
+
+class Bot extends Tank
+  _ai: null
+  destroy: ->
+    AI.disable @
