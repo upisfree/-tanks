@@ -12,8 +12,6 @@ class Tank extends Block
       @y += y
       blocks[@i] = this
 
-      console.log @lives
-
       for i in blocks
         if @x is i.x and @y is i.y and i.type is 'hedgehog'
           @applyDamage 1
@@ -49,3 +47,4 @@ class Bot extends Tank
   _ai: null
   destroy: ->
     AI.disable @
+    super 'Bye, bot!'
