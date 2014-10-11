@@ -1,6 +1,6 @@
 class Block
-  constructor: (x, y, texture) ->
-  size: 32
-  #move: (x, y) ->  
-
-blocks = []
+  constructor: (@x, @y, @texture, @i = blocks.length) ->
+  move: (x, y) ->
+    @x += x
+    @y += y
+    blocks[@i] = this

@@ -8,7 +8,7 @@ module.exports = (grunt) ->
           join: true
         files:
           'build/<%= pkg.name %>.js': [
-            'src/const.coffee'
+            'src/vars.coffee'
             'src/utils.coffee'
             'src/block.coffee'
             'src/map.coffee'
@@ -26,7 +26,7 @@ module.exports = (grunt) ->
       scripts:
         files: ['src/**/*.coffee']
         tasks: ['coffee', 'uglify']
-
+        
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
