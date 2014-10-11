@@ -1,3 +1,3 @@
 setInterval ->
   render()
-, 100
+, 16
