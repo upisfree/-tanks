@@ -34,7 +34,7 @@ class Player extends Tank
         when KEY_CODE.ARROW.LEFT,  KEY_CODE.A
           player.move -1, 0, 270
         when KEY_CODE.ARROW.UP,    KEY_CODE.W
-          player.move 0, -1, 0
+          player.move 0, -1, 360
         when KEY_CODE.ARROW.RIGHT, KEY_CODE.D
           player.move 1, 0, 90
         when KEY_CODE.ARROW.DOWN,  KEY_CODE.S
