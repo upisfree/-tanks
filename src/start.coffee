@@ -4,9 +4,10 @@ player.enableControl()
 blocks.push player
 
 # Create bots
-bot = new Bot Math.randomInt(0, size - 1), Math.randomInt(0, size - 1), 'bot', 1
-AI.enable bot
-blocks.push bot
+for i in [0..1]
+  bot = new Bot Math.randomInt(0, size - 1), Math.randomInt(0, size - 1), 'bot', 1
+  AI.enable bot
+  blocks.push bot
 
 setInterval ->
   render()

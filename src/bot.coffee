@@ -1,26 +1,46 @@
 AI =
   enable: (bot) ->
     bot._ai = setInterval ->
-      state = Math.randomInt(0, 3)
+      ax = +(player.x - bot.x)
+      ay = +(player.y - bot.y)
 
-      switch state
-        when 0
+      if ax < ay
+        axis = 'x'
+
+        if player.x > bot.x
+          direction = 'right'
+        else if player.x < bot.x
+          direction = 'left'
+        else if player.x is bot.x
+          console.log 'Catch you on x axis'
+      else
+        axis = 'y'
+
+        if player.y > bot.y
+          direction = 'down'
+        else if player.y < bot.y
+          direction = 'up'
+        else if player.y is bot.y
+          console.log 'Catch you on y axis!'
+      
+      switch direction
+        when 'up'
           x = 0
           y = -1
           deg = 360
-        when 1
+        when 'right'
           x = 1
           y = 0
           deg = 90
-        when 2
+        when 'down'
           x = 0
           y = 1
           deg = 180
-        when 3
+        when 'left'
           x = -1
           y = 0
           deg = 270
-      
+
       bot.move x, y, deg
     , 500
   disable: (bot) ->
