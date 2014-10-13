@@ -4,7 +4,7 @@ AI =
       ax = +(player.x - bot.x)
       ay = +(player.y - bot.y)
 
-      if ax < ay
+      if ax < ay # 11 if, 7 else
         axis = 'x'
 
         if player.x > bot.x
@@ -12,6 +12,11 @@ AI =
         else if player.x < bot.x
           direction = 'left'
         else if player.x is bot.x
+          if player.y > bot.y
+            bot.move 0, 0, 180
+          else if player.y < bot.y
+            bot.move 0, 0, 360
+
           console.log 'Catch you on x axis'
       else
         axis = 'y'
@@ -21,6 +26,11 @@ AI =
         else if player.y < bot.y
           direction = 'up'
         else if player.y is bot.y
+          if player.x > bot.x
+            bot.move 0, 0, 90
+          else if player.x < bot.x
+            bot.move 0, 0, 270
+
           console.log 'Catch you on y axis!'
       
       switch direction

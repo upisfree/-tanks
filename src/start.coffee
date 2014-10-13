@@ -4,7 +4,7 @@ player.enableControl()
 blocks.push player
 
 # Create bots
-for i in [0..1]
+for i in [0..9]
   bot = new Bot Math.randomInt(0, size - 1), Math.randomInt(0, size - 1), 'bot', 1
   AI.enable bot
   blocks.push bot
