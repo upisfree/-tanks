@@ -27,7 +27,7 @@
  3. 
 ```bash
 git clone https://github.com/upisfree/-tanks.git
-cd -tanks
+cd ./-tanks
 npm install
 grunt
 ```
