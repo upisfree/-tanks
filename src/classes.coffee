@@ -1,21 +1,25 @@
 class Block
-  constructor: (@x, @y, @type) ->
+  constructor: (@v, @type) ->
     @i = blocks.length
     #blocks.push @
 
 class Tank extends Block
-  constructor: (@x, @y, @type, @lives, @deg) ->
-  move: (x, y, deg) ->
-    @deg = deg if deg
+  constructor: (@v, @type, @lives) ->
+  move: (v) ->
+    x = v.x
+    y = v.y
+    deg = v.deg
 
-    if @x + x < size and @x + x > -1 and
-       @y + y < size and @y + y > -1
-      @x += x
-      @y += y
+    @v.deg = deg if deg
+
+    if @v.x + x < size and @v.x + x > -1 and
+       @v.y + y < size and @v.y + y > -1
+      @v.x += x
+      @v.y += y
       blocks[@i] = @
 
       for i in blocks
-        if @x is i.x and @y is i.y and i.type is 'hedgehog'
+        if @v.x is i.v.x and @v.y is i.v.y and i.type is 'hedgehog'
           @applyDamage 1
 
   applyDamage: (l) ->
@@ -32,13 +36,13 @@ class Player extends Tank
     window.onkeydown = (e) ->
       switch e.keyCode
         when KEY_CODE.ARROW.LEFT,  KEY_CODE.A
-          player.move -1, 0, 270
+          player.move new Vector -1, 0, 270
         when KEY_CODE.ARROW.UP,    KEY_CODE.W
-          player.move 0, -1, 360
+          player.move new Vector 0, -1, 0
         when KEY_CODE.ARROW.RIGHT, KEY_CODE.D
-          player.move 1, 0, 90
+          player.move new Vector 1, 0, 90
         when KEY_CODE.ARROW.DOWN,  KEY_CODE.S
-          player.move 0, 1, 180
+          player.move new Vector 0, 1, 180
   disableControl: ->
     window.onkeydown = null
   destroy: ->
