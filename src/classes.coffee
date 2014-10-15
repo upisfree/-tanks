@@ -1,7 +1,9 @@
 class Block
   constructor: (@v, @type) ->
     @i = blocks.length
-    #blocks.push @
+
+    if @type isnt 'player' or @type isnt 'bot'
+      blocks.push @
 
 class Tank extends Block
   constructor: (@v, @type, @lives) ->
@@ -32,6 +34,11 @@ class Tank extends Block
     console.log message
 
 class Player extends Tank
+  constructor: (@v) ->
+    super @v, 'player', 3
+    @.enableControl()
+
+    blocks.push @
   enableControl: ->
     window.onkeydown = (e) ->
       switch e.keyCode
@@ -50,7 +57,12 @@ class Player extends Tank
     super 'Bye, sir!'
 
 class Bot extends Tank
-  _ai: null
+  constructor: (@v) ->
+    super @v, 'bot', 2
+    AI.enable @
+
+    blocks.push @
   destroy: ->
     AI.disable @
     super 'Bye, bot!'
+  _ai: null
