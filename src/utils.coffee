@@ -11,7 +11,7 @@ drawTexture = (v, type) ->
   img.onload = ->
     context.save()
 
-    if type is 'player' or type is 'bot'
+    if type is BLOCK.PLAYER or type is BLOCK.BOT
       a = Math.PI / 180 * v.deg
     
       context.translate v.x + step / 2, v.y + step / 2
@@ -23,5 +23,5 @@ drawTexture = (v, type) ->
     context.restore()
 
 render = ->
-  for i in blocks
+  for i in objects.all
     drawTexture new Vector(i.v.x * step, i.v.y * step, i.v.deg), i.type
