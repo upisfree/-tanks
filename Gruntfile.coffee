@@ -23,10 +23,14 @@ module.exports = (grunt) ->
         dest: 'build/<%= pkg.name %>.js'
 
     watch:
-      scripts:
+      coffee:
         files: ['src/**/*.coffee']
         tasks: ['coffee', 'uglify']
-        
+      gruntfile:
+        files: 'Gruntfile.coffee'
+        options:
+          reload: true
+
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
