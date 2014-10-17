@@ -61,6 +61,11 @@ class Player extends Tank
 
   destroy: ->
     @disableControl()
+
+    for i in objects.bots
+      AI.disable i
+      AI.random i
+
     super 'Bye, sir!'
 
 class Bot extends Tank

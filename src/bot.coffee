@@ -45,3 +45,17 @@ AI =
     , 500
   disable: (bot) ->
     clearInterval bot._ai
+  random: (bot) ->
+    bot._ai = setInterval ->
+      direction = Math.randomInt 0, 3
+
+      switch direction
+        when 0 # up
+          bot.move new Vector 0, -1, 0
+        when 1 # right
+          bot.move new Vector 1, 0, 90
+        when 2 # down
+          bot.move new Vector 0, 1, 180
+        when 3 # left
+          bot.move new Vector -1, 0, 270
+    , 1000
