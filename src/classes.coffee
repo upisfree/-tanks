@@ -14,9 +14,10 @@ class Tank extends Block
   move: (v) ->
     x = v.x
     y = v.y
-    deg = v.deg
 
-    @v.deg = deg if deg
+    if @v.deg isnt v.deg # turning on the spot
+      @v.deg = v.deg
+      return  
 
     if @v.x + x < size and @v.x + x > -1 and
        @v.y + y < size and @v.y + y > -1
