@@ -1,33 +1,42 @@
 class Block
-  constructor: (@v, @type) ->
-    @i = objects.all.length
-
-    if @type isnt BLOCK.PLAYER or @type isnt BLOCK.BOT
-      objects.all.push @
+  constructor: (@x, @y, @rotation, @type, @i = stage.children.length) ->
+    @s = new PIXI.Sprite PIXI.Texture.fromImage "../textures/#{@type}.png"
+    @s.position.x = @x * step + step / 2
+    @s.position.y = @y * step + step / 2
+    @s.rotation   = Math.degreesToRadians @rotation
+    @s.anchor.x = 0.5
+    @s.anchor.y = 0.5
+  
+    stage.addChild @s
 
     if @type is BLOCK.HEDGEHOD
-      objects.hedgehogs.push @
-    
+      entities.hedgehogs.push @
 
 class Tank extends Block
-  constructor: (@v, @type, @lives) ->
-  move: (v) ->
-    x = v.x
-    y = v.y
+  constructor: (@x, @y, @rotation, @type, @lives) ->
+    super @x, @y, @rotation, @type
+  move: (x, y, rotation) ->
+    rotation = Math.degreesToRadians rotation
 
-    if @v.deg isnt v.deg # turning on the spot
-      @v.deg = v.deg
-      return  
+    s = stage.children[@i]
 
-    if @v.x + x < size and @v.x + x > -1 and
-       @v.y + y < size and @v.y + y > -1
-      @v.x += x
-      @v.y += y
-      objects.all[@i] = @
+    if s.rotation isnt rotation # turning on the spot
+      s.rotation = rotation
+      stage.children[@i] = s
+      return
 
-      for i in objects.all
-        if @v.x is i.v.x and @v.y is i.v.y and i.type is BLOCK.HEDGEHOD
+    if s.position.x + x * step < screenSize and s.position.x + x * step > -1 and
+       s.position.y + y * step < screenSize and s.position.y + y * step > -1
+      @x += x
+      @y += y
+      s.position.x += x * step
+      s.position.y += y * step
+
+      for a in entities.hedgehogs #.concat entities.bots
+        if @x is a.x and @y is a.y
           @applyDamage 1
+
+      stage.children[@i] = s
 
   applyDamage: (l) ->
     @lives -= l
@@ -36,26 +45,27 @@ class Tank extends Block
       @destroy 'Tank was destroyed!'
 
   destroy: (message) ->
+    @_isAlive = false
     console.log message
+  _isAlive: true
 
 class Player extends Tank
-  constructor: (@v) ->
-    super @v, BLOCK.PLAYER, 3
-    @.enableControl()
-
-    objects.all.push @
+  constructor: (@x, @y, @rotation) ->
+    super @x, @y, @rotation, BLOCK.PLAYER, 3
+    @enableControl()
 
   enableControl: ->
+    p = @
     window.onkeydown = (e) ->
       switch e.keyCode
         when KEY_CODE.ARROW.LEFT,  KEY_CODE.A
-          player.move new Vector -1, 0, 270
+          p.move -1, 0, 270
         when KEY_CODE.ARROW.UP,    KEY_CODE.W
-          player.move new Vector 0, -1, 0
+          p.move 0, -1, 0
         when KEY_CODE.ARROW.RIGHT, KEY_CODE.D
-          player.move new Vector 1, 0, 90
+          p.move 1, 0, 90
         when KEY_CODE.ARROW.DOWN,  KEY_CODE.S
-          player.move new Vector 0, 1, 180
+          p.move 0, 1, 180
 
   disableControl: ->
     window.onkeydown = null
@@ -63,19 +73,19 @@ class Player extends Tank
   destroy: ->
     @disableControl()
 
-    for i in objects.bots
-      AI.disable i
-      AI.random i
+    for a in entities.bots
+      if a._isAlive is true
+        AI.disable a
+        AI.random a
 
     super 'Bye, sir!'
 
 class Bot extends Tank
-  constructor: (@v) ->
-    super @v, BLOCK.BOT, 2
+  constructor: (@x, @y, @rotation) ->
+    super @x, @y, @rotation, BLOCK.BOT, 2
     AI.enable @
 
-    objects.all.push @
-    objects.bots.push @
+    entities.bots.push @
 
   destroy: ->
     AI.disable @

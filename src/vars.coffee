@@ -1,14 +1,15 @@
 # Screen vars
-canvas = document.getElementsByTagName('canvas')[0]
-context = canvas.getContext '2d'
-
 screenSize = 640
 step = 32
 size = screenSize / step
 
+stage = new PIXI.Stage 0x3f2700
+renderer = new PIXI.autoDetectRenderer screenSize, screenSize
+
+document.body.appendChild renderer.view
+
 # Game objects
-objects =
-  all: []
+entities =
   hedgehogs: []
   bots: []
 
