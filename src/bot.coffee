@@ -28,8 +28,6 @@ AI =
             bot.move 0, 0, 180
           else if player.y < bot.y
             bot.move 0, 0, 0
-
-          # bot.shoot()
       else
         axis = 'y'
 
@@ -43,8 +41,6 @@ AI =
           else if player.x < bot.x
             bot.move 0, 0, 270
 
-        # bot.shoot()
-
       switch direction
         when 'up'
           bot.move 0, -1, 0
@@ -54,6 +50,8 @@ AI =
           bot.move 0, 1, 180
         when 'left'
           bot.move -1, 0, 270
+      
+      bot.shoot()
     , 500
   disable: (bot) ->
     clearInterval bot._ai

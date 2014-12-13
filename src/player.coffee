@@ -3,6 +3,8 @@ class Player extends Tank
     super @x, @y, @rotation, BLOCK.PLAYER, 3
     @enableControl()
 
+    entities.players.push @
+
   enableControl: ->
     p = @
     window.onkeydown = (e) ->

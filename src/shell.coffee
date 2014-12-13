@@ -1,5 +1,11 @@
 class Shell extends Block
   constructor: (@x, @y, @rotation) ->
+    switch @rotation
+      when 0 then --@y
+      when 90 then ++@x
+      when 180 then ++@y
+      when 270 then --@x
+
     super @x, @y, @rotation, BLOCK.SHELL
 
 removeShell = (s) ->
@@ -20,6 +26,11 @@ moveShells = -> # new Pixi.SpriteBatch() for render shells
       removeShell a
 
     for b in entities.bots
+      if isCollision(a.s.position.x, a.s.position.y, b.s.position.x, b.s.position.y) is true and b._isAlive is true
+        removeShell a
+        b.applyDamage 1
+
+    for b in entities.players # in one loop with bots?
       if isCollision(a.s.position.x, a.s.position.y, b.s.position.x, b.s.position.y) is true and b._isAlive is true
         removeShell a
         b.applyDamage 1

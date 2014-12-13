@@ -12,6 +12,7 @@ document.body.appendChild renderer.view
 entities =
   hedgehogs: []
   bots: []
+  players: []
   shells: []
 
 # Other
