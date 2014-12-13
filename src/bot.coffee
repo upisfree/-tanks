@@ -17,7 +17,7 @@ AI =
           else if player.y < bot.y
             bot.move 0, 0, 0
 
-          console.log 'Catch you on x axis'
+          # bot.shoot()
       else
         axis = 'y'
 
@@ -31,8 +31,8 @@ AI =
           else if player.x < bot.x
             bot.move 0, 0, 270
 
-          console.log 'Catch you on y axis!'
-      
+        # bot.shoot()
+
       switch direction
         when 'up'
           bot.move 0, -1, 0

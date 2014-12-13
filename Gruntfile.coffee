@@ -11,21 +11,18 @@ module.exports = (grunt) ->
             'src/vars.coffee'
             'src/utils.coffee'
             'src/classes.coffee'
+            'src/shell.coffee'
             'src/map.coffee'
             'src/player.coffee'
             'src/bot.coffee'
             'src/start.coffee'
           ]
 
-    uglify:
-      build:
-        src: 'build/<%= pkg.name %>.js'
-        dest: 'build/<%= pkg.name %>.js'
 
     watch:
       coffee:
         files: ['src/**/*.coffee']
-        tasks: ['coffee', 'uglify']
+        tasks: ['coffee']
       gruntfile:
         files: 'Gruntfile.coffee'
         options:

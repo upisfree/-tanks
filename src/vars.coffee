@@ -12,6 +12,10 @@ document.body.appendChild renderer.view
 entities =
   hedgehogs: []
   bots: []
+  shells: []
+
+# Other
+shellSpeed = 2
 
 # Block types
 BLOCK =
@@ -23,6 +27,7 @@ BLOCK =
   DIRT: 'dirt'
   GRASS: 'grass'
   PUDDLE: 'puddle'
+  SHELL: 'shell'
 
 # Key codes
 KEY_CODE =

@@ -1,1 +1,427 @@
-(function(){var a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y={}.hasOwnProperty,z=function(a,b){function c(){this.constructor=a}for(var d in b)y.call(b,d)&&(a[d]=b[d]);return c.prototype=b.prototype,a.prototype=new c,a.__super__=b.prototype,a};for(n=640,q=32,o=n/q,p=new PIXI.Stage(4138752),m=new PIXI.autoDetectRenderer(n,n),document.body.appendChild(m.view),i={hedgehogs:[],bots:[]},b={PLAYER:"player",BOT:"bot",HEDGEHOD:"hedgehog",GROUND:"ground",GRAVEL:"gravel",DIRT:"dirt",GRASS:"grass",PUDDLE:"puddle"},e={CTRL:17,ALT:18,ESC:27,SPACE:32,ENTER:13,ARROW:{UP:38,LEFT:37,DOWN:40,RIGHT:39},W:87,A:65,S:83,D:68},Math.randomInt=function(a,b){return Math.floor(Math.random()*(b-a+1)+a)},Math.radiansToDegrees=function(a){return a*(180/Math.PI)},Math.degreesToRadians=function(a){return 0===a&&(a=360),a*(Math.PI/180)},h=function(){return requestAnimFrame(h),m.render(p)},c=function(){function a(a,c,d,e,f){this.x=a,this.y=c,this.rotation=d,this.type=e,this.i=null!=f?f:p.children.length,this.s=new PIXI.Sprite(PIXI.Texture.fromImage("../textures/"+this.type+".png")),this.s.position.x=this.x*q+q/2,this.s.position.y=this.y*q+q/2,this.s.rotation=Math.degreesToRadians(this.rotation),this.s.anchor.x=.5,this.s.anchor.y=.5,p.addChild(this.s),this.type===b.HEDGEHOD&&i.hedgehogs.push(this)}return a}(),g=function(a){function b(a,c,d,e,f){this.x=a,this.y=c,this.rotation=d,this.type=e,this.lives=f,b.__super__.constructor.call(this,this.x,this.y,this.rotation,this.type)}return z(b,a),b.prototype.move=function(a,b,c){var d,e,f,g,h;if(c=Math.degreesToRadians(c),e=p.children[this.i],e.rotation!==c)return e.rotation=c,void(p.children[this.i]=e);if(e.position.x+a*q<n&&e.position.x+a*q>-1&&e.position.y+b*q<n&&e.position.y+b*q>-1){for(this.x+=a,this.y+=b,e.position.x+=a*q,e.position.y+=b*q,h=i.hedgehogs,f=0,g=h.length;g>f;f++)d=h[f],this.x===d.x&&this.y===d.y&&this.applyDamage(1);return p.children[this.i]=e}},b.prototype.applyDamage=function(a){return this.lives-=a,this.lives<=0?this.destroy("Tank was destroyed!"):void 0},b.prototype.destroy=function(a){return this._isAlive=!1,console.log(a)},b.prototype._isAlive=!0,b}(c),f=function(c){function d(a,c,e){this.x=a,this.y=c,this.rotation=e,d.__super__.constructor.call(this,this.x,this.y,this.rotation,b.PLAYER,3),this.enableControl()}return z(d,c),d.prototype.enableControl=function(){var a;return a=this,window.onkeydown=function(b){switch(b.keyCode){case e.ARROW.LEFT:case e.A:return a.move(-1,0,270);case e.ARROW.UP:case e.W:return a.move(0,-1,0);case e.ARROW.RIGHT:case e.D:return a.move(1,0,90);case e.ARROW.DOWN:case e.S:return a.move(0,1,180)}}},d.prototype.disableControl=function(){return window.onkeydown=null},d.prototype.destroy=function(){var b,c,e,f;for(this.disableControl(),f=i.bots,c=0,e=f.length;e>c;c++)b=f[c],b._isAlive===!0&&(a.disable(b),a.random(b));return d.__super__.destroy.call(this,"Bye, sir!")},d}(g),d=function(c){function d(c,e,f){this.x=c,this.y=e,this.rotation=f,d.__super__.constructor.call(this,this.x,this.y,this.rotation,b.BOT,2),a.enable(this),i.bots.push(this)}return z(d,c),d.prototype.destroy=function(){return a.disable(this),d.__super__.destroy.call(this,"Bye, bot!")},d.prototype._ai=null,d}(g),r=t=0,w=o-1;w>=0?w>=t:t>=w;r=w>=0?++t:--t)for(s=u=0,x=o-1;x>=0?x>=u:u>=x;s=x>=0?++u:--u)new c(r,s,0,b.GROUND),l=Math.randomInt(0,100),10>l&&new c(r,s,0,b.GRAVEL),l>10&&20>l&&new c(r,s,0,b.DIRT),l>20&&30>l&&new c(r,s,0,b.GRASS),90===l&&new c(r,s,0,b.PUDDLE),l>95&&new c(r,s,0,b.HEDGEHOD);for(a={enable:function(a){return a._ai=setInterval(function(){var b,c,d,e;switch(b=+(k.x-a.x),d=+(k.y-a.y),d>b?(c="x",k.x>a.x?e="right":k.x<a.x?e="left":k.x===a.x&&(k.y>a.y?a.move(0,0,180):k.y<a.y&&a.move(0,0,0),console.log("Catch you on x axis"))):(c="y",k.y>a.y?e="down":k.y<a.y?e="up":k.y===a.y&&(k.x>a.x?a.move(0,0,90):k.x<a.x&&a.move(0,0,270),console.log("Catch you on y axis!"))),e){case"up":return a.move(0,-1,0);case"right":return a.move(1,0,90);case"down":return a.move(0,1,180);case"left":return a.move(-1,0,270)}},500)},disable:function(a){return clearInterval(a._ai)},random:function(a){return a._ai=setInterval(function(){var b;switch(b=Math.randomInt(0,3)){case 0:return a.move(0,-1,0);case 1:return a.move(1,0,90);case 2:return a.move(0,1,180);case 3:return a.move(-1,0,270)}},1e3)}},k=new f(Math.randomInt(0,o-1),Math.randomInt(0,o-1),0),j=v=0;9>=v;j=++v)new d(Math.randomInt(0,o-1),Math.randomInt(0,o-1),0);requestAnimFrame(h)}).call(this);
+(function() {
+  var AI, BLOCK, Block, Bot, KEY_CODE, Player, Shell, Tank, animate, entities, i, isCollision, moveShells, player, r, removeShell, renderer, screenSize, shellSpeed, size, stage, step, x, y, _i, _j, _k, _ref, _ref1,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  screenSize = 640;
+
+  step = 32;
+
+  size = screenSize / step;
+
+  stage = new PIXI.Stage(0x3f2700);
+
+  renderer = new PIXI.autoDetectRenderer(screenSize, screenSize);
+
+  document.body.appendChild(renderer.view);
+
+  entities = {
+    hedgehogs: [],
+    bots: [],
+    shells: []
+  };
+
+  shellSpeed = 2;
+
+  BLOCK = {
+    PLAYER: 'player',
+    BOT: 'bot',
+    HEDGEHOD: 'hedgehog',
+    GROUND: 'ground',
+    GRAVEL: 'gravel',
+    DIRT: 'dirt',
+    GRASS: 'grass',
+    PUDDLE: 'puddle',
+    SHELL: 'shell'
+  };
+
+  KEY_CODE = {
+    CTRL: 17,
+    ALT: 18,
+    ESC: 27,
+    SPACE: 32,
+    ENTER: 13,
+    ARROW: {
+      UP: 38,
+      LEFT: 37,
+      DOWN: 40,
+      RIGHT: 39
+    },
+    W: 87,
+    A: 65,
+    S: 83,
+    D: 68
+  };
+
+  Math.randomInt = function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  };
+
+  Math.radiansToDegrees = function(r) {
+    return r * (180 / Math.PI);
+  };
+
+  Math.degreesToRadians = function(d) {
+    if (d === 0) {
+      d = 360;
+    }
+    return d * (Math.PI / 180);
+  };
+
+  Array.prototype.remove = function(obj) {
+    var key, value, _results;
+    _results = [];
+    for (key in this) {
+      value = this[key];
+      if (value.i === obj.i) {
+        _results.push(this.splice(key, 1));
+      } else {
+        _results.push(void 0);
+      }
+    }
+    return _results;
+  };
+
+  isCollision = function(x1, y1, x2, y2, s1, s2) {
+    if (s1 == null) {
+      s1 = step;
+    }
+    if (s2 == null) {
+      s2 = step;
+    }
+    if ((x1 + s1 >= x2 && x1 <= x2 + s2) && (y1 + s1 >= y2 && y1 <= y2 + s2)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  Block = (function() {
+    function Block(x, y, rotation, type, i) {
+      this.x = x;
+      this.y = y;
+      this.rotation = rotation;
+      this.type = type;
+      this.i = i != null ? i : stage.children.length;
+      this.s = new PIXI.Sprite(PIXI.Texture.fromImage("../textures/" + this.type + ".png"));
+      this.s.position.x = this.x * step + step / 2;
+      this.s.position.y = this.y * step + step / 2;
+      this.s.rotation = Math.degreesToRadians(this.rotation);
+      this.s.anchor.x = 0.5;
+      this.s.anchor.y = 0.5;
+      stage.addChild(this.s);
+      switch (this.type) {
+        case BLOCK.HEDGEHOD:
+          entities.hedgehogs.push(this);
+          break;
+        case BLOCK.SHELL:
+          entities.shells.push(this);
+      }
+    }
+
+    return Block;
+
+  })();
+
+  Tank = (function(_super) {
+    __extends(Tank, _super);
+
+    function Tank(x, y, rotation, type, lives) {
+      this.x = x;
+      this.y = y;
+      this.rotation = rotation;
+      this.type = type;
+      this.lives = lives;
+      Tank.__super__.constructor.call(this, this.x, this.y, this.rotation, this.type);
+    }
+
+    Tank.prototype.move = function(x, y, r) {
+      var a, rotation, s, _i, _len, _ref;
+      rotation = Math.degreesToRadians(r);
+      s = stage.children[this.i];
+      if (s.rotation !== rotation) {
+        this.rotation = r;
+        s.rotation = rotation;
+        stage.children[this.i] = s;
+        return;
+      }
+      if (s.position.x + x * step < screenSize && s.position.x + x * step > -1 && s.position.y + y * step < screenSize && s.position.y + y * step > -1) {
+        this.x += x;
+        this.y += y;
+        s.position.x += x * step;
+        s.position.y += y * step;
+        _ref = entities.hedgehogs;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          a = _ref[_i];
+          if (this.x === a.x && this.y === a.y) {
+            this.applyDamage(1);
+          }
+        }
+        return stage.children[this.i] = s;
+      }
+    };
+
+    Tank.prototype.applyDamage = function(l) {
+      this.lives -= l;
+      if (this.lives <= 0) {
+        return this.destroy('Tank was destroyed!');
+      }
+    };
+
+    Tank.prototype.destroy = function(message) {
+      this._isAlive = false;
+      return console.log(message);
+    };
+
+    Tank.prototype.shoot = function() {
+      return new Shell(this.x, this.y, this.rotation);
+    };
+
+    Tank.prototype._isAlive = true;
+
+    return Tank;
+
+  })(Block);
+
+  Player = (function(_super) {
+    __extends(Player, _super);
+
+    function Player(x, y, rotation) {
+      this.x = x;
+      this.y = y;
+      this.rotation = rotation;
+      Player.__super__.constructor.call(this, this.x, this.y, this.rotation, BLOCK.PLAYER, 3);
+      this.enableControl();
+    }
+
+    Player.prototype.enableControl = function() {
+      var p;
+      p = this;
+      return window.onkeydown = function(e) {
+        switch (e.keyCode) {
+          case KEY_CODE.ARROW.LEFT:
+          case KEY_CODE.A:
+            return p.move(-1, 0, 270);
+          case KEY_CODE.ARROW.UP:
+          case KEY_CODE.W:
+            return p.move(0, -1, 0);
+          case KEY_CODE.ARROW.RIGHT:
+          case KEY_CODE.D:
+            return p.move(1, 0, 90);
+          case KEY_CODE.ARROW.DOWN:
+          case KEY_CODE.S:
+            return p.move(0, 1, 180);
+          case KEY_CODE.SPACE:
+            return p.shoot();
+        }
+      };
+    };
+
+    Player.prototype.disableControl = function() {
+      return window.onkeydown = null;
+    };
+
+    Player.prototype.destroy = function() {
+      var a, _i, _len, _ref;
+      this.disableControl();
+      _ref = entities.bots;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        a = _ref[_i];
+        if (a._isAlive === true) {
+          AI.disable(a);
+          AI.random(a);
+        }
+      }
+      return Player.__super__.destroy.call(this, 'Bye, sir!');
+    };
+
+    return Player;
+
+  })(Tank);
+
+  Bot = (function(_super) {
+    __extends(Bot, _super);
+
+    function Bot(x, y, rotation) {
+      this.x = x;
+      this.y = y;
+      this.rotation = rotation;
+      Bot.__super__.constructor.call(this, this.x, this.y, this.rotation, BLOCK.BOT, 2);
+      AI.enable(this);
+      entities.bots.push(this);
+    }
+
+    Bot.prototype.destroy = function() {
+      AI.disable(this);
+      return Bot.__super__.destroy.call(this, 'Bye, bot!');
+    };
+
+    Bot.prototype._ai = null;
+
+    return Bot;
+
+  })(Tank);
+
+  Shell = (function(_super) {
+    __extends(Shell, _super);
+
+    function Shell(x, y, rotation) {
+      this.x = x;
+      this.y = y;
+      this.rotation = rotation;
+      Shell.__super__.constructor.call(this, this.x, this.y, this.rotation, BLOCK.SHELL);
+    }
+
+    return Shell;
+
+  })(Block);
+
+  removeShell = function(s) {
+    entities.shells.remove(s);
+    return stage.children.splice(s.i, 1);
+  };
+
+  moveShells = function() {
+    var a, b, _i, _len, _ref, _results;
+    _ref = entities.shells;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      a = _ref[_i];
+      switch (a.rotation) {
+        case 0:
+          a.s.position.y -= shellSpeed;
+          break;
+        case 90:
+          a.s.position.x += shellSpeed;
+          break;
+        case 180:
+          a.s.position.y += shellSpeed;
+          break;
+        case 270:
+          a.s.position.x -= shellSpeed;
+      }
+      if (a.s.position.x > screenSize || a.s.position.x < 0 || a.s.position.y > screenSize || a.s.position.y < 0) {
+        removeShell(a);
+      }
+      _results.push((function() {
+        var _j, _len1, _ref1, _results1;
+        _ref1 = entities.bots;
+        _results1 = [];
+        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+          b = _ref1[_j];
+          if (isCollision(a.s.position.x, a.s.position.y, b.s.position.x, b.s.position.y) === true && b._isAlive === true) {
+            removeShell(a);
+            _results1.push(b.applyDamage(1));
+          } else {
+            _results1.push(void 0);
+          }
+        }
+        return _results1;
+      })());
+    }
+    return _results;
+  };
+
+  for (x = _i = 0, _ref = size - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; x = 0 <= _ref ? ++_i : --_i) {
+    for (y = _j = 0, _ref1 = size - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
+      new Block(x, y, 0, BLOCK.GROUND);
+      r = Math.randomInt(0, 100);
+      if (r < 10) {
+        new Block(x, y, 0, BLOCK.GRAVEL);
+      }
+      if (r > 10 && r < 20) {
+        new Block(x, y, 0, BLOCK.DIRT);
+      }
+      if (r > 20 && r < 30) {
+        new Block(x, y, 0, BLOCK.GRASS);
+      }
+      if (r === 90) {
+        new Block(x, y, 0, BLOCK.PUDDLE);
+      }
+      if (r > 95) {
+        new Block(x, y, 0, BLOCK.HEDGEHOD);
+      }
+    }
+  }
+
+  AI = {
+    enable: function(bot) {
+      return bot._ai = setInterval(function() {
+        var ax, axis, ay, direction;
+        ax = +(player.x - bot.x);
+        ay = +(player.y - bot.y);
+        if (ax < ay) {
+          axis = 'x';
+          if (player.x > bot.x) {
+            direction = 'right';
+          } else if (player.x < bot.x) {
+            direction = 'left';
+          } else if (player.x === bot.x) {
+            if (player.y > bot.y) {
+              bot.move(0, 0, 180);
+            } else if (player.y < bot.y) {
+              bot.move(0, 0, 0);
+            }
+          }
+        } else {
+          axis = 'y';
+          if (player.y > bot.y) {
+            direction = 'down';
+          } else if (player.y < bot.y) {
+            direction = 'up';
+          } else if (player.y === bot.y) {
+            if (player.x > bot.x) {
+              bot.move(0, 0, 90);
+            } else if (player.x < bot.x) {
+              bot.move(0, 0, 270);
+            }
+          }
+        }
+        switch (direction) {
+          case 'up':
+            return bot.move(0, -1, 0);
+          case 'right':
+            return bot.move(1, 0, 90);
+          case 'down':
+            return bot.move(0, 1, 180);
+          case 'left':
+            return bot.move(-1, 0, 270);
+        }
+      }, 500);
+    },
+    disable: function(bot) {
+      return clearInterval(bot._ai);
+    },
+    random: function(bot) {
+      return bot._ai = setInterval(function() {
+        var direction;
+        direction = Math.randomInt(0, 3);
+        switch (direction) {
+          case 0:
+            return bot.move(0, -1, 0);
+          case 1:
+            return bot.move(1, 0, 90);
+          case 2:
+            return bot.move(0, 1, 180);
+          case 3:
+            return bot.move(-1, 0, 270);
+        }
+      }, 1000);
+    }
+  };
+
+  player = new Player(Math.randomInt(0, size - 1), Math.randomInt(0, size - 1), 0);
+
+  for (i = _k = 0; _k <= 9; i = ++_k) {
+    new Bot(Math.randomInt(0, size - 1), Math.randomInt(0, size - 1), 0);
+  }
+
+  animate = function() {
+    requestAnimFrame(animate);
+    moveShells();
+    return renderer.render(stage);
+  };
+
+  requestAnimFrame(animate);
+
+}).call(this);

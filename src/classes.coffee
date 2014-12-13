@@ -9,18 +9,20 @@ class Block
   
     stage.addChild @s
 
-    if @type is BLOCK.HEDGEHOD
-      entities.hedgehogs.push @
+    switch @type
+      when BLOCK.HEDGEHOD then entities.hedgehogs.push @
+      when BLOCK.SHELL    then entities.shells.push @
 
 class Tank extends Block
   constructor: (@x, @y, @rotation, @type, @lives) ->
     super @x, @y, @rotation, @type
-  move: (x, y, rotation) ->
-    rotation = Math.degreesToRadians rotation
+  move: (x, y, r) ->
+    rotation = Math.degreesToRadians r
 
     s = stage.children[@i]
 
     if s.rotation isnt rotation # turning on the spot
+      @rotation = r
       s.rotation = rotation
       stage.children[@i] = s
       return
@@ -47,6 +49,10 @@ class Tank extends Block
   destroy: (message) ->
     @_isAlive = false
     console.log message
+
+  shoot: ->
+    new Shell @x, @y, @rotation
+
   _isAlive: true
 
 class Player extends Tank
@@ -66,6 +72,8 @@ class Player extends Tank
           p.move 1, 0, 90
         when KEY_CODE.ARROW.DOWN,  KEY_CODE.S
           p.move 0, 1, 180
+        when KEY_CODE.SPACE
+          p.shoot()
 
   disableControl: ->
     window.onkeydown = null
