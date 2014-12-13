@@ -1,3 +1,15 @@
+class Bot extends Tank
+  constructor: (@x, @y, @rotation) ->
+    super @x, @y, @rotation, BLOCK.BOT, 2
+    AI.enable @
+
+    entities.bots.push @
+
+  destroy: ->
+    AI.disable @
+    super 'Bye, bot!'
+  _ai: null
+
 AI =
   enable: (bot) ->
     bot._ai = setInterval ->
