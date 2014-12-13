@@ -51,6 +51,9 @@ class Tank extends Block
     console.log message
 
   shoot: ->
-    new Shell @x, @y, @rotation
+    if Date.now() - @_lastShoot >= 2000 # wait 2s 
+      new Shell @x, @y, @rotation
+      @_lastShoot = Date.now()
 
   _isAlive: true
+  _lastShoot: Date.now() # +new Date() — there's an another Date object, I don't want get it
