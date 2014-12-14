@@ -9,7 +9,7 @@ for i in [0..9]
 animate = ->
   requestAnimFrame animate
 
-  moveShells()
+  shell.moveAll()
   setCamera()
 
   renderer.render stage

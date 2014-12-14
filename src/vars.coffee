@@ -25,9 +25,6 @@ entities =
   players: []
   shells: []
 
-# Other
-shellSpeed = 2
-
 # Block types
 BLOCK =
   PLAYER: 'player'
