@@ -1,13 +1,13 @@
 class Block
-  constructor: (@x, @y, @rotation, @type, @i = stage.children.length) ->
+  constructor: (@x, @y, @rotation, @type, @i = container.children.length) ->
     @s = new PIXI.Sprite PIXI.Texture.fromImage "../assets/textures/#{@type}.png"
     @s.position.x = @x * step + step / 2
     @s.position.y = @y * step + step / 2
     @s.rotation   = Math.degreesToRadians @rotation
     @s.anchor.x = 0.5
     @s.anchor.y = 0.5
-  
-    stage.addChild @s
+
+    container.addChild @s
 
     switch @type
       when BLOCK.HEDGEHOD then entities.hedgehogs.push @
@@ -19,12 +19,12 @@ class Tank extends Block
   move: (x, y, r) ->
     rotation = Math.degreesToRadians r
 
-    s = stage.children[@i]
+    s = container.children[@i]
 
     if s.rotation isnt rotation # turning on the spot
       @rotation = r
       s.rotation = rotation
-      stage.children[@i] = s
+      container.children[@i] = s
       return
 
     if s.position.x + x * step < screen.x and s.position.x + x * step > -1 and
@@ -38,7 +38,7 @@ class Tank extends Block
         if @x is a.x and @y is a.y
           @applyDamage 1
 
-      stage.children[@i] = s
+      container.children[@i] = s
 
   applyDamage: (l) ->
     @lives -= l

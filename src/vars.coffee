@@ -8,12 +8,8 @@ screen =
   x: size.x * step
   y: size.y * step
 
-screen.x = size.x * step
-screen.y = size.y * step
-
-console.log screen, size
-
 stage = new PIXI.Stage 0x3f2700
+container = new PIXI.DisplayObjectContainer() # new PIXI.SpriteBatch()
 renderer = new PIXI.autoDetectRenderer screen.x, screen.y
 
 document.body.appendChild renderer.view

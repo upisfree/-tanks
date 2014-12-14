@@ -12,7 +12,7 @@ shell =
   speed: 2 # pixels per frame
   remove: (s) ->
     entities.shells.remove s
-    stage.children.splice s.i, 1 # stage.children.removeChild doesn't remove shell from screen
+    container.children.splice s.i, 1 # container.children.removeChild doesn't remove shell from screen
   moveAll: -> # new Pixi.SpriteBatch() for render shells
     for a in entities.shells
       switch a.rotation

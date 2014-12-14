@@ -34,4 +34,4 @@ class Player extends Tank
     super 'Bye, sir!'
 
 setCamera = ->
-  window.stage = stage
+  window.container = container
