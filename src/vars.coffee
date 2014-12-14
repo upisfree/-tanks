@@ -1,10 +1,20 @@
 # Screen vars
-screenSize = 640
 step = 32
-size = screenSize / step
+size =
+  x: ((window.innerWidth  - 94) / step).toFixed() # canvas.top * 2 + canvas.border.width * 2 = 94
+  y: ((window.innerHeight - 94) / step).toFixed()
+
+screen =
+  x: size.x * step
+  y: size.y * step
+
+screen.x = size.x * step
+screen.y = size.y * step
+
+console.log screen, size
 
 stage = new PIXI.Stage 0x3f2700
-renderer = new PIXI.autoDetectRenderer screenSize, screenSize
+renderer = new PIXI.autoDetectRenderer screen.x, screen.y
 
 document.body.appendChild renderer.view
 

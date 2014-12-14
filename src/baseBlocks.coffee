@@ -27,8 +27,8 @@ class Tank extends Block
       stage.children[@i] = s
       return
 
-    if s.position.x + x * step < screenSize and s.position.x + x * step > -1 and
-       s.position.y + y * step < screenSize and s.position.y + y * step > -1
+    if s.position.x + x * step < screen.x and s.position.x + x * step > -1 and
+       s.position.y + y * step < screen.y and s.position.y + y * step > -1
       @x += x
       @y += y
       s.position.x += x * step

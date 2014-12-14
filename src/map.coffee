@@ -1,5 +1,5 @@
-for x in [0..size - 1]
-  for y in [0..size - 1]
+for x in [0..size.x]
+  for y in [0..size.y]
     new Block x, y, 0, BLOCK.GROUND
 
     r = Math.randomInt 0, 100
@@ -12,5 +12,5 @@ for x in [0..size - 1]
       new Block x, y, 0, BLOCK.GRASS
     if r is 90
       new Block x, y, 0, BLOCK.PUDDLE
-    if r > 95
-      new Block x, y, 0, BLOCK.HEDGEHOD
+    #if r > 95
+    #  new Block x, y, 0, BLOCK.HEDGEHOD

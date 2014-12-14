@@ -21,8 +21,8 @@ moveShells = -> # new Pixi.SpriteBatch() for render shells
       when 270 then a.s.position.x -= shellSpeed  
 
     # if don't see shell — remove
-    if a.s.position.x > screenSize or a.s.position.x < 0 or
-       a.s.position.y > screenSize or a.s.position.y < 0
+    if a.s.position.x > screen.x or a.s.position.x < 0 or
+       a.s.position.y > screen.y or a.s.position.y < 0
       removeShell a
 
     for b in entities.bots

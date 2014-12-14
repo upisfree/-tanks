@@ -32,3 +32,6 @@ class Player extends Tank
         AI.random a
 
     super 'Bye, sir!'
+
+setCamera = ->
+  window.stage = stage
