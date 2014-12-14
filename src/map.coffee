@@ -12,5 +12,5 @@ for x in [0..size.x]
       new Block x, y, 0, BLOCK.GRASS
     if r is 90
       new Block x, y, 0, BLOCK.PUDDLE
-    #if r > 95
-    #  new Block x, y, 0, BLOCK.HEDGEHOD
+    if r > 95
+      new Block x, y, 0, BLOCK.HEDGEHOD
