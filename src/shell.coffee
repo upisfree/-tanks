@@ -1,4 +1,4 @@
-class Shell extends Block
+class Shell extends Body
   constructor: (@x, @y, @rotation) ->
     switch @rotation
       when 0 then --@y

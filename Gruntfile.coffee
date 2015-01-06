@@ -18,21 +18,32 @@ module.exports = (grunt) ->
             'src/start.coffee'
           ]
 
+    bower_concat:
+      all:
+        dest: 'build/lib.js'
+
     uglify:
-      build:
+      src:
         src: 'build/<%= pkg.name %>.js'
         dest: 'build/<%= pkg.name %>.js'
+      lib:
+        src: 'build/lib.js'
+        dest: 'build/lib.js'
 
     watch:
       coffee:
         files: ['src/**/*.coffee']
-        tasks: ['coffee', 'uglify']
+        tasks: ['coffee', 'uglify:src']
+      bower:
+        files: ['bower.json']
+        tasks: ['bower_concat', 'uglify:lib']
       gruntfile:
         files: 'Gruntfile.coffee'
         options:
           reload: true
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
+  grunt.loadNpmTasks 'grunt-bower-concat'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
 

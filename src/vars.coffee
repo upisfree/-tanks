@@ -8,11 +8,21 @@ screen =
   x: size.x * step
   y: size.y * step
 
-stage = new PIXI.Stage 0x3f2700
-container = new PIXI.DisplayObjectContainer() # new PIXI.SpriteBatch()
-renderer = new PIXI.autoDetectRenderer screen.x, screen.y
+# Engine
+engine = Matter.Engine.create document.body,
+  render:
+    options:
+      wireframes: false
+      width: screen.x
+      height: screen.y
 
-document.body.appendChild renderer.view
+console.log engine.render
+
+#stage = new PIXI.Stage 0xffffff #0x3f2700
+#container = new PIXI.DisplayObjectContainer() # new PIXI.SpriteBatch()
+#renderer = new PIXI.autoDetectRenderer screen.x, screen.y
+
+#document.body.appendChild renderer.view
 
 # Game objects
 entities =

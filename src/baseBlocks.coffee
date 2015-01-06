@@ -1,4 +1,4 @@
-class Block
+class Body
   constructor: (@x, @y, @rotation, @type, @i = container.children.length) ->
     @s = new PIXI.Sprite PIXI.Texture.fromImage "../assets/textures/#{@type}.png"
     @s.position.x = @x * step + step / 2
@@ -7,13 +7,13 @@ class Block
     @s.anchor.x = 0.5
     @s.anchor.y = 0.5
 
-    container.addChild @s
+    engine.render.addChild @s
 
     switch @type
       when BLOCK.HEDGEHOD then entities.hedgehogs.push @
       when BLOCK.SHELL    then entities.shells.push @
 
-class Tank extends Block
+class Tank extends Body
   constructor: (@x, @y, @rotation, @type, @lives) ->
     super @x, @y, @rotation, @type
   move: (x, y, r) ->
@@ -56,4 +56,4 @@ class Tank extends Block
       @_lastShoot = Date.now()
 
   _isAlive: true
-  _lastShoot: Date.now() # +new Date() — there's an another Date object, I don't want get it
+  _lastShoot: Date.now() # +new Date() — there's a new Date object, I don't want get it (oh, memory...)
