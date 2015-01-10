@@ -1,5 +1,10 @@
+DEV = false
+
 module.exports = (grunt) ->
-  grunt.initConfig
+  require('load-grunt-tasks')(grunt)
+  require('time-grunt')(grunt)
+
+  config =
     pkg: grunt.file.readJSON 'package.json'
 
     coffee:
@@ -8,6 +13,8 @@ module.exports = (grunt) ->
           join: true
         files:
           'build/<%= pkg.name %>.js': [
+            'src/config.coffee'
+            'src/render.coffee'
             'src/vars.coffee'
             'src/utils.coffee'
             'src/baseBlocks.coffee'
@@ -21,6 +28,9 @@ module.exports = (grunt) ->
     bower_concat:
       all:
         dest: 'build/lib.js'
+        mainFiles:
+          'pixi.js': 'bin/pixi.dev.js',
+          'matter-js': 'build/matter.js'
 
     uglify:
       src:
@@ -33,18 +43,19 @@ module.exports = (grunt) ->
     watch:
       coffee:
         files: ['src/**/*.coffee']
-        tasks: ['coffee', 'uglify:src']
+        tasks: ['coffee']
       bower:
         files: ['bower.json']
-        tasks: ['bower_concat', 'uglify:lib']
+        tasks: ['bower_concat']
       gruntfile:
         files: 'Gruntfile.coffee'
         options:
           reload: true
 
-  grunt.loadNpmTasks 'grunt-contrib-coffee'
-  grunt.loadNpmTasks 'grunt-bower-concat'
-  grunt.loadNpmTasks 'grunt-contrib-uglify'
-  grunt.loadNpmTasks 'grunt-contrib-watch'
+  if DEV is false
+    config.watch.coffee.tasks.push 'uglify:src'
+    config.watch.bower.tasks.push 'uglify:lib'
+
+  grunt.initConfig config
 
   grunt.registerTask 'default', 'watch'

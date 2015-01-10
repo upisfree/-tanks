@@ -10,19 +10,24 @@ screen =
 
 # Engine
 engine = Matter.Engine.create document.body,
+  world:
+    gravity:
+      x: 0
+      y: 0
+    bounds:
+      min:
+        x: -Infinity
+        y: -Infinity
+      max:
+        x: Infinity
+        y: Infinity
   render:
+    controller: Matter.RenderPixi
     options:
-      wireframes: false
       width: screen.x
       height: screen.y
-
-console.log engine.render
-
-#stage = new PIXI.Stage 0xffffff #0x3f2700
-#container = new PIXI.DisplayObjectContainer() # new PIXI.SpriteBatch()
-#renderer = new PIXI.autoDetectRenderer screen.x, screen.y
-
-#document.body.appendChild renderer.view
+      wireframes: false
+  map: []
 
 # Game objects
 entities =

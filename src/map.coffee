@@ -1,23 +1,16 @@
 Map =
   Cell: class
     constructor: (@x, @y, @rotation, @type) ->
-      @s = new PIXI.Sprite PIXI.Texture.fromImage "../assets/textures/#{@type}.png"
-      @s.position.x = @x * step + step / 2
-      @s.position.y = @y * step + step / 2
-      @s.rotation   = Math.degreesToRadians @rotation
-      @s.anchor.x = 0.5
-      @s.anchor.y = 0.5
+      @sprite = new PIXI.Sprite PIXI.Texture.fromImage "assets/textures/#{@type}.png"
+      @sprite.position.x = @x * step + step / 2
+      @sprite.position.y = @y * step + step / 2
+      @sprite.rotation = Math.degreesToRadians @rotation
+      @sprite.anchor.x = 0.5
+      @sprite.anchor.y = 0.5
 
-      #console.log engine.render.stage
+      @isRendered = false
 
-      #engine.render.container = new PIXI.DisplayObjectContainer()
-
-      ##container.addChild @s
-      #engine.render.stage = new PIXI.Stage()
-      console.log engine.render.Stage
-      engine.render.stage.addChild(render.container)
-
-      #engine.render.textures += @s
+      engine.map.push @
   generate: ->
     for x in [0..size.x]
       for y in [0..size.y]

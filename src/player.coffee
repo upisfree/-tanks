@@ -1,4 +1,28 @@
-class Player extends Tank
+class Player
+  constructor: (@x, @y) ->
+    @body = Matter.Bodies.rectangle @x, @y, 23, 29,
+      render:
+        sprite:
+          texture: 'assets/textures/player.png'
+      restitution: 0.5
+
+    Matter.Composite.add engine.world, @body
+
+  move: (x, y) ->
+    @body.position.x += x
+    @body.position.y += y
+    @x = @body.position.x
+    @y = @body.position.y
+
+  enableControl: ->
+    window.onkeyup = (e) ->
+      switch e.keyboard.sourceEvents.keyup.keyCode
+        when KEY_CODE.ARROW.LEFT,  KEY_CODE.A then player.move -5, null
+        when KEY_CODE.ARROW.UP,    KEY_CODE.W then player.move null, -10
+        when KEY_CODE.ARROW.RIGHT, KEY_CODE.D then player.move 5, null
+        when KEY_CODE.ARROW.DOWN,  KEY_CODE.S then player.move null, 10
+
+class Player2 extends Tank
   constructor: (@x, @y, @rotation) ->
     super @x, @y, @rotation, BLOCK.PLAYER, 3
     @enableControl()
