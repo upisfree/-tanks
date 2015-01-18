@@ -15,10 +15,10 @@ class Player extends Tank
 
     # Rotating
     Mousetrap.bind ['a', 'left'], ->
-      Matter.Body.rotate player.body, Math.degreesToRadians -5
+      Matter.Body.rotate player.body, Math.degreesToRadians -2
 
     Mousetrap.bind ['d', 'right'], ->
-      Matter.Body.rotate player.body, Math.degreesToRadians 5 # 2?
+      Matter.Body.rotate player.body, Math.degreesToRadians 2 # 2?
 
   enableMouse: (player) ->
     window.onmousemove = (e) ->

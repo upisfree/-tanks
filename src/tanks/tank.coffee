@@ -4,7 +4,8 @@ class Tank
       render:
         sprite:
           texture: "assets/textures/#{@texture}.png"
-      restitution: 0.5
+      friction: 1
+      frictionAir: 0.1
       mass: 1000
 
     Matter.Composite.add engine.world, @body
