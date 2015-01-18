@@ -13,6 +13,7 @@
   ],
   "dependencies": {
     "pixi.js": "~2.2.0",
-    "matter-js": "~0.8.0-alpha"
+    "matter-js": "~0.8.0-alpha",
+    "mousetrap": "~1.4.6"
   }
 }
