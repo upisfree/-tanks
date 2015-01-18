@@ -1,4 +1,4 @@
-DEV = false
+DEV = true
 
 module.exports = (grunt) ->
   require('load-grunt-tasks')(grunt)
@@ -20,7 +20,8 @@ module.exports = (grunt) ->
             'src/baseBlocks.coffee'
             'src/shell.coffee'
             'src/map.coffee'
-            'src/player.coffee'
+            'src/tanks/tank.coffee'
+            'src/tanks/player.coffee'
             'src/bot.coffee'
             'src/start.coffee'
           ]
