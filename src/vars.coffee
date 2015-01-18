@@ -1,12 +1,18 @@
 # Screen vars
 step = 32
 size =
-  x: ((window.innerWidth  - 94) / step).toFixed() # canvas.top * 2 + canvas.border.width * 2 = 94
-  y: ((window.innerHeight - 94) / step).toFixed()
+  x: (window.innerWidth / step).toFixed()
+  y: (window.innerHeight / step).toFixed()
 
 screen =
   x: size.x * step
   y: size.y * step
+
+# Mouse
+Mouse =
+  position:
+    x: 0
+    y: 0
 
 # Engine
 engine = Matter.Engine.create document.body,
@@ -47,22 +53,3 @@ BLOCK =
   GRASS: 'grass'
   PUDDLE: 'puddle'
   SHELL: 'shell'
-
-# Key codes
-KEY_CODE =
-  CTRL: 17
-  ALT: 18
-  ESC: 27
-  SPACE: 32
-  ENTER: 13
-
-  ARROW:
-    UP: 38
-    LEFT: 37
-    DOWN: 40
-    RIGHT: 39
-
-  W: 87
-  A: 65
-  S: 83
-  D: 68
