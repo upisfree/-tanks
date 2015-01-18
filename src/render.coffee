@@ -21,8 +21,6 @@ Matter.RenderPixi.world = (engine) ->
   for i in constraints
     Matter.RenderPixi.constraint engine, i
 
-  console.log engine
-
   context.render stage
 
 # RenderPixi.clear()?

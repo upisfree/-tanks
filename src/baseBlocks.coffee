@@ -13,7 +13,7 @@ class Body
       when BLOCK.HEDGEHOD then entities.hedgehogs.push @
       when BLOCK.SHELL    then entities.shells.push @
 
-class Tank extends Body
+class Tank2 extends Body
   constructor: (@x, @y, @rotation, @type, @lives) ->
     super @x, @y, @rotation, @type
   move: (x, y, r) ->
