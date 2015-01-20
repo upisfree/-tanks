@@ -1,4 +1,10 @@
-class Shell extends Body
+class Shell
+  constructor: (@parent) -> # @tank?
+    # ...
+  
+
+
+class Shell2 extends Body
   constructor: (@x, @y, @rotation) ->
     switch @rotation
       when 0 then --@y
