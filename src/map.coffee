@@ -1,7 +1,7 @@
 Map =
   Cell: class
     constructor: (@x, @y, @rotation, @type) ->
-      @sprite = new PIXI.Sprite PIXI.Texture.fromImage "assets/textures/#{@type}.png"
+      @sprite = new PIXI.Sprite PIXI.Texture.fromImage "assets/textures/ground/#{@type}.png"
       @sprite.position.x = @x * step + step / 2
       @sprite.position.y = @y * step + step / 2
       @sprite.rotation = Math.degreesToRadians @rotation

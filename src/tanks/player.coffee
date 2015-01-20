@@ -26,13 +26,7 @@ class Player extends Tank
         x: e.x
         y: e.y
 
-      #b = Mouse.position
-      #a = player.body.position
-
-      #console.log Matter.Vector.sub Mouse.position, player.body.position
-
-      #console.log Math.atan2 a.y - b.y, a.x - b.x
-      #player.body.angle = Math.atan2 a.y - b.y, a.x - b.x
+      player.body.render.tank.children[1].rotation = Math.atan2(player.body.position.y - e.y, player.body.position.x - e.x) - Math.PI / 2
 
 class Player2 extends Tank
   constructor: (@x, @y, @rotation) ->

@@ -1,12 +1,24 @@
 class Tank
-  constructor: (x, y, @texture, @width = 23, @height = 29) -> # TODO: size to another place
+  constructor: (x, y, @texture, @width = 25, @height = 23) -> # TODO: size to another place
     @body = Matter.Bodies.rectangle x, y, @width, @height,
       render:
-        sprite:
-          texture: "assets/textures/#{@texture}.png"
+        tank: null
       friction: 1
       frictionAir: 0.1
       mass: 1000
+
+    @body.render.tank = new PIXI.DisplayObjectContainer()
+
+    base = new PIXI.Sprite PIXI.Texture.fromImage "assets/textures/tanks/#{@texture}/base.png"
+    base.position = { x: x, y: y }
+    base.anchor = { x: 0.5, y: 0.5 }
+
+    turret = new PIXI.Sprite PIXI.Texture.fromImage "assets/textures/tanks/#{@texture}/turret.png"
+    turret.position = { x: x, y: y }
+    turret.anchor = { x: 0.5, y: 0.73 }
+
+    @body.render.tank.addChild base
+    @body.render.tank.addChild turret
 
     Matter.Composite.add engine.world, @body
 
