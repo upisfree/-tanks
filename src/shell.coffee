@@ -15,7 +15,11 @@ class Shell
 
     Matter.Composite.add engine.world, @body
 
+    # Move shell
     Matter.Body.applyForce @body, { x: 0, y: 0 }, Vector.mult _v, 200
+    
+    # Move tank
+    Matter.Body.applyForce @tank.body, { x: 0, y: 0 }, Vector.neg Vector.mult _v, 50
 
 class Shell2 extends Body
   constructor: (@x, @y, @rotation) ->

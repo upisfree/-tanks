@@ -3,7 +3,7 @@ class Tank
     @body = Matter.Bodies.rectangle x, y, @width, @height,
       friction: 1
       frictionAir: 0.1
-      mass: 1000
+      mass: 10000
       render:
         tank: null
 
@@ -23,7 +23,7 @@ class Tank
     Matter.Composite.add engine.world, @body
 
   move: (force) ->
-    Matter.Body.applyForce @body, { x: 0, y: 0 }, force
+    Matter.Body.applyForce @body, { x: 0, y: 0 }, Vector.mult force, 10
 
   shoot: ->
     #if Date.now() - @_lastShoot >= 2000 # wait 2s 

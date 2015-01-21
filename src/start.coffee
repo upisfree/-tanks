@@ -1,20 +1,24 @@
 # Start
-
-# Filters
-#filter =
-#  pixel: new PIXI.PixelateFilter()
-#filter.pixel.size.x = filter.pixel.size.y = 3
-
-#container.filters = [filter.pixel]
-
 Matter.Engine.run engine
 
+# Filters
+if config.debug is false
+  filter =
+    pixel: new PIXI.PixelateFilter()
+  filter.pixel.size = { x: 3, y: 3 }
+
+  engine.render.spriteBatch.filters = [filter.pixel]
+
+# Spawn bots
 for i in [0..100]
   new Tank Math.randomInt(0, screen.x), Math.randomInt(0, screen.y), 'bot'
 
+# Spawn player
 new Player screen.x / 2, screen.y / 2
 
+# Can't understand what does do this code :(
 Map.generate()
+
 ###
 setInterval ->
   bodies = Matter.Composite.allBodies engine.world
