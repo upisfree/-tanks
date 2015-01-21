@@ -61,12 +61,9 @@ Matter.RenderPixi.world = (engine) ->
   options = render.options
   bodies = Matter.Composite.allBodies world
   constraints = Matter.Composite.allConstraints world
-  i = 0
 
   for i in map
-    if i.isRendered is false
-      render.spriteBatch.addChild i.sprite
-      i.isRendered = true
+    render.spriteBatch.addChildAt i.sprite, 0
 
   for i in bodies
     Matter.RenderPixi.body engine, i

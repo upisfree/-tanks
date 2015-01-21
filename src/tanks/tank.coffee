@@ -25,6 +25,11 @@ class Tank
   move: (force) ->
     Matter.Body.applyForce @body, { x: 0, y: 0 }, force
 
+  shoot: ->
+    if Date.now() - @_lastShoot >= 2000 # wait 2s 
+      new Shell @
+      @_lastShoot = Date.now()
+
   applyDamage: (l) ->
     @lives -= l
 

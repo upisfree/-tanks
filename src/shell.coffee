@@ -1,7 +1,18 @@
 class Shell
-  constructor: (@parent) -> # @tank?
-    # ...
-  
+  constructor: (@tank) ->
+    _v = Vector.fromAngle @tank.body.turretRotation
+    x = @tank.body.position.x + _v.x
+    y = @tank.body.position.y + _v.y
+
+    @body = Matter.Bodies.rectangle x, y, 7, 14,
+      render:
+        sprite:
+          texture: "assets/textures/tanks/shell.png"
+      friction: 1
+      frictionAir: 0.1
+      mass: 1000
+
+    Matter.Composite.add engine.world, @body
 
 
 class Shell2 extends Body
