@@ -1,11 +1,11 @@
 class Tank
   constructor: (x, y, @texture, @width = 25, @height = 23) -> # TODO: size to another place
     @body = Matter.Bodies.rectangle x, y, @width, @height,
-      render:
-        tank: null
       friction: 1
       frictionAir: 0.1
       mass: 1000
+      render:
+        tank: null
 
     @body.render.tank = new PIXI.DisplayObjectContainer()
 
@@ -26,9 +26,9 @@ class Tank
     Matter.Body.applyForce @body, { x: 0, y: 0 }, force
 
   shoot: ->
-    if Date.now() - @_lastShoot >= 2000 # wait 2s 
-      new Shell @
-      @_lastShoot = Date.now()
+    #if Date.now() - @_lastShoot >= 2000 # wait 2s 
+    new Shell @
+    @_lastShoot = Date.now()
 
   applyDamage: (l) ->
     @lives -= l

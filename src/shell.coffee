@@ -1,19 +1,21 @@
 class Shell
   constructor: (@tank) ->
     _v = Vector.fromAngle @tank.body.turretRotation
-    x = @tank.body.position.x + _v.x
-    y = @tank.body.position.y + _v.y
+    x = @tank.body.position.x + _v.x * 20
+    y = @tank.body.position.y + _v.y * 20
 
     @body = Matter.Bodies.rectangle x, y, 7, 14,
-      render:
-        sprite:
-          texture: "assets/textures/tanks/shell.png"
+      angle: @tank.body.turretRotation
       friction: 1
       frictionAir: 0.1
       mass: 1000
+      render:
+        sprite:
+          texture: "assets/textures/tanks/shell.png"
 
     Matter.Composite.add engine.world, @body
 
+    Matter.Body.applyForce @body, { x: 0, y: 0 }, Vector.mult _v, 200
 
 class Shell2 extends Body
   constructor: (@x, @y, @rotation) ->
