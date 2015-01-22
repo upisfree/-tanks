@@ -13,6 +13,8 @@ class Shell
         sprite:
           texture: "assets/textures/tanks/shell.png"
 
+    @body.label = "shell-#{@tank.body.id}" # it's to know the name of the murder
+
     Matter.Composite.add engine.world, @body
 
     # Move shell
@@ -20,6 +22,13 @@ class Shell
     
     # Move tank
     Matter.Body.applyForce @tank.body, { x: 0, y: 0 }, Vector.neg Vector.mult _v, 50
+
+    Matter.Events.on engine, 'collisionEnd', (event) ->
+      pairs = event.pairs
+
+      for pair in pairs
+        console.log pair.bodyA.label + ':' + pair.bodyB.label
+        #console.log pair.bodyA.speed + ':' + pair.bodyB.speed
 
 class Shell2 extends Body
   constructor: (@x, @y, @rotation) ->

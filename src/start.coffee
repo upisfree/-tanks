@@ -30,5 +30,15 @@ setInterval ->
 
 # Camera
 Matter.Events.on engine, 'tick', (e) ->
+  # Kill static shells
+  #bodies = Matter.Composite.allBodies engine.world # make it with sleeping?
+
+  #for body in bodies
+  #  if body.label.match /shell/ and body.isSleeping # почему не работает?
+  #    console.log body
+      #Matter.Composite.remove bodies, body
+
+
+  #if config.debug
   window.engine = engine
   #engine.render.context.offset = new PIXI.Point window.w / 2 - player.body.position.x, window.h / 2 - player.body.position.y

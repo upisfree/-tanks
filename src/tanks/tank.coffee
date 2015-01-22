@@ -7,6 +7,8 @@ class Tank
       render:
         tank: null
 
+    @body.label = "tank-#{@body.id}"
+
     @body.render.tank = new PIXI.DisplayObjectContainer()
 
     base = new PIXI.Sprite PIXI.Texture.fromImage "assets/textures/tanks/#{@texture}/base.png"

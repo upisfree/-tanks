@@ -38,10 +38,10 @@ engine = Matter.Engine.create document.body,
 
 # Game objects
 entities =
-  hedgehogs: []
-  bots: []
-  players: []
-  shells: []
+  tanks: []
+  #hedgehogs: []
+  #bots: []
+  #players: []
 
 # Block types
 BLOCK =
