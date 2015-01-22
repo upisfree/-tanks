@@ -27,6 +27,7 @@ engine = Matter.Engine.create document.body,
       max:
         x: Infinity
         y: Infinity
+  enableSleeping: true
   render:
     controller: Matter.RenderPixi
     options:
