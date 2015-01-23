@@ -23,11 +23,17 @@ class Shell
     # Move tank
     Matter.Body.applyForce @tank.body, { x: 0, y: 0 }, Vector.neg Vector.mult _v, 50
 
-    Matter.Events.on engine, 'collisionEnd', (event) ->
+    Matter.Events.on engine, 'collisionStart', (event) ->
       pairs = event.pairs
 
       for pair in pairs
-        console.log pair.bodyA.label + ':' + pair.bodyB.label
+        if pair.bodyA.label.contains('tank') and pair.bodyB.label.contains('shell')
+          Matter.Composite.remove engine.world, pair.bodyB
+        else if pair.bodyA.label.contains('shell') and pair.bodyB.label.contains('shell')
+          Matter.Composite.remove engine.world, [pair.bodyA, pair.bodyA]
+
+        console.log pair
+        #console.log pair.bodyA.label + ':' + pair.bodyB.label
         #console.log pair.bodyA.speed + ':' + pair.bodyB.speed
 
 class Shell2 extends Body

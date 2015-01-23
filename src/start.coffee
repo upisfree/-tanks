@@ -31,13 +31,11 @@ setInterval ->
 # Camera
 Matter.Events.on engine, 'tick', (e) ->
   # Kill static shells
-  #bodies = Matter.Composite.allBodies engine.world # make it with sleeping?
+  bodies = Matter.Composite.allBodies engine.world # make it with sleeping?
 
-  #for body in bodies
-  #  if body.label.match /shell/ and body.isSleeping # почему не работает?
-  #    console.log body
-      #Matter.Composite.remove bodies, body
-
+  for body in bodies
+    if body.label.contains('shell') and body.isSleeping
+      Matter.Composite.remove engine.world, body
 
   #if config.debug
   window.engine = engine
