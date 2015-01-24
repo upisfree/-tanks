@@ -30,6 +30,7 @@ node_modules
 .lock-wscript
 
 # -tanks
+build/
 
 # Bower
 bower_components
