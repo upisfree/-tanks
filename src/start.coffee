@@ -9,17 +9,16 @@ if config.debug is false
 
   engine.render.spriteBatch.filters = [filter.pixel]
 
-# Spawn bots
-for i in [0..100]
-  new Tank Math.randomInt(0, screen.x), Math.randomInt(0, screen.y), 'bot'
-
-# Spawn player
-player = new Player screen.x / 2, screen.y / 2
-
 # Can't understand what does do this code :(
 Map.generate()
 
+# Spawn bots
+#for i in [0..100]
+#  new Tank Math.randomInt(0, screen.x), Math.randomInt(0, screen.y), 'bot'
 
+# Spawn player
+player = new Player screen.x / 2, screen.y / 2
+Camera.followPlayer player
 
 Matter.Events.on engine, 'tick', (e) ->
   # Kill static shells
@@ -28,9 +27,6 @@ Matter.Events.on engine, 'tick', (e) ->
   for body in bodies
     if body.label.contains('shell') and body.isSleeping
       Matter.Composite.remove engine.world, body
-
-  # Camera
-  engine.render.context.offset = new PIXI.Point window.innerWidth / 2 - player.body.position.x, window.innerHeight / 2 - player.body.position.y
 
   # debug
   if config.debug

@@ -27,7 +27,9 @@ class Player extends Tank
           x: e.x
           y: e.y
 
-        player.body.render.tank.children[1].rotation = player.body.turretRotation = Math.atan2(player.body.position.y - e.y, player.body.position.x - e.x) - Math.PI / 2
+#        console.log Math.atan2(player.body.position.y - e.y, player.body.position.x - e.x)
+
+        player.body.render.tank.children[1].rotation = player.body.turretRotation = Math.atan2(screen.y / 2 - e.y, screen.x / 2 - e.x) - Math.PI / 2
 
       window.onclick = (e) ->
         player.shoot()

@@ -14,10 +14,10 @@ module.exports = (grunt) ->
         files:
           'build/<%= pkg.name %>.js': [
             'src/config.coffee'
+            'src/utils.coffee'
             'src/render.coffee'
             'src/vars.coffee'
-            'src/utils.coffee'
-            'src/baseBlocks.coffee'
+            'src/camera.coffee'
             'src/shell.coffee'
             'src/map.coffee'
             'src/tanks/tank.coffee'
