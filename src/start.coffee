@@ -19,16 +19,8 @@ new Player screen.x / 2, screen.y / 2
 # Can't understand what does do this code :(
 Map.generate()
 
-###
-setInterval ->
-  bodies = Matter.Composite.allBodies engine.world
 
-  for i in bodies
-    Matter.Body.applyForce i, { x: 0, y: 0 }, { x: Math.randomInt(-10, 10), y: Math.randomInt(-10, 10) }
-, 1000
-###
 
-# Camera
 Matter.Events.on engine, 'tick', (e) ->
   # Kill static shells
   bodies = Matter.Composite.allBodies engine.world # make it with sleeping?
@@ -37,6 +29,7 @@ Matter.Events.on engine, 'tick', (e) ->
     if body.label.contains('shell') and body.isSleeping
       Matter.Composite.remove engine.world, body
 
-  #if config.debug
-  window.engine = engine
-  #engine.render.context.offset = new PIXI.Point window.w / 2 - player.body.position.x, window.h / 2 - player.body.position.y
+  if config.debug
+    window.engine = engine
+  
+#engine.render.context.offset = new PIXI.Point window.w / 2 - player.body.position.x, window.h / 2 - player.body.position.y

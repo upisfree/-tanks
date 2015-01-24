@@ -1,3 +1,3 @@
 config =
-  debug: false
+  debug: true
   path: './-tanks/'

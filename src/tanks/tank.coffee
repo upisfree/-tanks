@@ -24,6 +24,8 @@ class Tank
 
     Matter.Composite.add engine.world, @body
 
+    entities.tanks[@body.id] = @
+
   move: (force) ->
     Matter.Body.applyForce @body, { x: 0, y: 0 }, Vector.mult force, 10
 
@@ -32,15 +34,12 @@ class Tank
     new Shell @
     @_lastShoot = Date.now()
 
-  applyDamage: (l) ->
-    @lives -= l
-
-    if @lives <= 0
-      @destroy 'Tank was destroyed!'
-
-  destroy: (message) ->
+  destroy: ->
     @_isAlive = false
-    console.log message
+    delete entities.tanks[@body.id]
 
+    console.log @body.label + ' was destroyed!'
+
+  lives: 100 # in %
   _isAlive: true
   _lastShoot: Date.now() # +new Date() — there's a new Date object, I don't want get it (oh, memory...)
