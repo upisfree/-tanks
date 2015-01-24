@@ -14,7 +14,7 @@ for i in [0..100]
   new Tank Math.randomInt(0, screen.x), Math.randomInt(0, screen.y), 'bot'
 
 # Spawn player
-new Player screen.x / 2, screen.y / 2
+player = new Player screen.x / 2, screen.y / 2
 
 # Can't understand what does do this code :(
 Map.generate()
@@ -29,7 +29,10 @@ Matter.Events.on engine, 'tick', (e) ->
     if body.label.contains('shell') and body.isSleeping
       Matter.Composite.remove engine.world, body
 
+  # Camera
+  engine.render.context.offset = new PIXI.Point window.innerWidth / 2 - player.body.position.x, window.innerHeight / 2 - player.body.position.y
+
+  # debug
   if config.debug
     window.engine = engine
   
-#engine.render.context.offset = new PIXI.Point window.w / 2 - player.body.position.x, window.h / 2 - player.body.position.y
