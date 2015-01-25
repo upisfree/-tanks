@@ -1,34 +1,33 @@
 # Start
-Matter.Engine.run engine
+Matter.Engine.run Engine
 
 # Filters
-if config.debug is false
+if Config.debug is false
   filter =
     pixel: new PIXI.PixelateFilter()
   filter.pixel.size = { x: 3, y: 3 }
 
-  engine.render.spriteBatch.filters = [filter.pixel]
+  Engine.render.spriteBatch.filters = [filter.pixel]
 
 # Can't understand what does do this code :(
 Map.generate()
 
 # Spawn bots
-#for i in [0..100]
-#  new Tank Math.randomInt(0, screen.x), Math.randomInt(0, screen.y), 'bot'
+for i in [0..100]
+  new Tank Math.randomInt(0, Screen.size.x), Math.randomInt(0, Screen.size.y), 'bot'
 
 # Spawn player
-player = new Player screen.x / 2, screen.y / 2
+player = new Player Screen.size.x / 2, Screen.size.y / 2
 Camera.followPlayer player
 
-Matter.Events.on engine, 'tick', (e) ->
+Matter.Events.on Engine, 'tick', (e) ->
   # Kill static shells
-  bodies = Matter.Composite.allBodies engine.world # make it with sleeping?
+  bodies = Matter.Composite.allBodies Engine.world # make it in sleep class?
 
   for body in bodies
     if body.label.contains('shell') and body.isSleeping
-      Matter.Composite.remove engine.world, body
+      Matter.Composite.remove Engine.world, body
 
   # debug
-  if config.debug
-    window.engine = engine
-  
+  if Config.debug
+    window.engine = Engine

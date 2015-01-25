@@ -22,9 +22,9 @@ class Tank
     @body.render.tank.addChild base
     @body.render.tank.addChild turret
 
-    Matter.Composite.add engine.world, @body
+    Matter.Composite.add Engine.world, @body
 
-    entities.tanks[@body.id] = @
+    Entities.tanks[@body.id] = @
 
   move: (force) ->
     Matter.Body.applyForce @body, { x: 0, y: 0 }, Vector.mult force, 10
@@ -36,7 +36,7 @@ class Tank
 
   destroy: ->
     @_isAlive = false
-    delete entities.tanks[@body.id]
+    delete Entities.tanks[@body.id]
 
     console.log @body.label + ' was destroyed!'
 

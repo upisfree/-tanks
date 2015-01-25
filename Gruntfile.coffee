@@ -13,16 +13,16 @@ module.exports = (grunt) ->
           join: true
         files:
           'build/<%= pkg.name %>.js': [
-            'src/config.coffee'
-            'src/utils.coffee'
-            'src/render.coffee'
-            'src/vars.coffee'
-            'src/camera.coffee'
-            'src/shell.coffee'
-            'src/map.coffee'
-            'src/tanks/tank.coffee'
-            'src/tanks/player.coffee'
-            'src/bot.coffee'
+            'src/core/config.coffee'
+            'src/core/system.coffee'
+            'src/core/math.coffee'
+            'src/core/render.coffee'
+            'src/core/vars.coffee'
+            'src/core/camera.coffee'
+            'src/map/map.coffee' # cell.coffee, chunk.coffee
+            'src/tank/shell.coffee'
+            'src/tank/tank.coffee'
+            'src/tank/player.coffee'
             'src/start.coffee'
           ]
 
